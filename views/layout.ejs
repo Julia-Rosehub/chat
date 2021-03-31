@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1">
+    <title>Chat</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/chat_app.css">
+    <script type="text/javascript" src="/js/chatApp.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <div id="nav">
+        <div class="nav-align">
+            <h1 id="title">App</h1>
+        </div>
+        <div id="nav-icon" class="nav-align">
+            <% if (loggedIn) { %>
+                <a href="/chat" class="chat-icon">
+                    @
+                </a>
+                <% } %>
+                    <a href="/">
+                        <span class="button">Home</span>
+                    </a>
+                    <a href="/subscribers">
+                        <span class="button">Cooking Courses</span>
+                    </a>
+                    <a href="/contact">
+                        <span class="button">Contact</span>
+                    </a>
+                    <%- include("courses/coursesModal") %>
+                        <div class="login">
+                            <% if (loggedIn) { %>
+
+                                <p>Logged in as
+                                    <a href="<%=`/users/${currentUser._id}`%>">
+                                        <%= currentUser.fullName %>
+                                    </a>
+                                    <span class="log-out">
+                                        <a href="/users/logout">Log out</a>
+                                    </span>
+                                </p>
+                                <%} else {%>
+                                    <a href="/users/login">Log In</a>
+                                    <% } %>
+                        </div>
+        </div>
+    </div>
+
+    <div class="flashes">
+        <% if (flashMessages) { %>
+            <% if (flashMessages.success) { %>
+                <div class="flash success">
+                    <%= flashMessages.success %>
+                </div>
+                <% } else if (flashMessages.error) { %>
+                    <div class="flash error">
+                        <%= flashMessages.error %>
+                    </div>
+                    <% } %>
+                        <% } %>
+    </div>
+    <div class="container">
+        <%- body %>
+            <%- include("partials/footer") %>
+    </div>
+</body>
+
+</html>

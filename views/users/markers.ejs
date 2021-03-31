@@ -1,0 +1,59 @@
+<% if (currentUser){ %>                     
+             <input id="chat-user-id" type="hidden" value="<%= currentUser._id %>">      
+             <div class="container"> 
+          <div id='mapid'></div>
+       <script>
+           const $chatUserId =$('#chat-user-id');
+           userId = $chatUserId.val(),
+           center = {lat: 51.509, lng: -0.09};
+            let coords;
+            const map = L.map('mapid').setView(center, 12);
+                 L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+           function onMapClick(e) {
+                 coords = e.latlng;
+                 marker = L.marker(coords);
+                 marker.addTo(map);
+                 foo(coords)
+           }
+           function foo(coord){
+                 $.ajax({
+                 url:'/markers/'+userId,
+                 type: 'POST',
+                 dataType: 'json',
+                 data: {coordinates: JSON.stringify(coord)},
+                 success: function(data, text, jqXHR) {
+                      alert(data);
+                 },
+                 error: function(req, status, error) {
+                      alert(status, error);
+                 }
+            });
+          } 
+        map.on('click', onMapClick);
+            
+        $(window).load(function() {
+             let result;
+            $.ajax({
+                url:'/markers/?type=json',
+                type:'GET',
+                success: function(data) {
+                    $.each(data, function(item){
+                               result = data.filter(item =>item.user===userId);
+                         });
+                         result.forEach(item => {
+                              marker = L.marker(JSON.parse(item.coordinates))
+                              marker.addTo(map)
+                         });
+                    },
+                 error: function(req, status, error) {
+                      alert(status, error);
+                 }
+            })
+        })
+       </script>  
+</div>
+<% } %>   
+      
