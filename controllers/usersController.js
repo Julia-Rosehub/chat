@@ -27,12 +27,15 @@ module.exports = {
                 next(error);
             });
     },
+
     indexView: (req, res) => {
         res.render("users/index");
     },
+
     new: (req, res) => {
         res.render("users/new");
     },
+
     create: (req, res, next) => {
 
         if (req.skip) next();
@@ -51,11 +54,13 @@ module.exports = {
             }
         });
     },
+
     redirectView: (req, res, next) => {
         let redirectPath = res.locals.redirect;
         if (redirectPath) res.redirect(redirectPath);
         else next();
     },
+
     show: (req, res, next) => {
         let userId = req.params.id;
         User.findById(userId)
@@ -68,9 +73,11 @@ module.exports = {
                 next(error);
             });
     },
+
     showView: (req, res) => {
         res.render("users/show");
     },
+
     edit: (req, res, next) => {
         let userId = req.params.id;
         User.findById(userId)
@@ -84,6 +91,7 @@ module.exports = {
                 next(error);
             });
     },
+
     update: (req, res, next) => {
         let userId = req.params.id,
             userParams = {
@@ -109,6 +117,7 @@ module.exports = {
                 next(error);
             });
     },
+
     delete: (req, res, next) => {
         let userId = req.params.id;
         User.findByIdAndRemove(userId)
@@ -121,21 +130,25 @@ module.exports = {
                 next();
             });
     },
+
     login: (req, res) => {
         res.render("users/login");
     },
+
     logout: (req, res, next) => {
         req.logout();
         req.flash("success", "You have been logged out!");
         res.locals.redirect = "/";
         next();
     },
+
     authenticate: passport.authenticate("local", {
         failureRedirect: "/users/login",
         failureFlash: "Failed to login.",
         successRedirect: "/",
         successFlash: "Logged in!"
     }),
+
     apiAuthenticate: (req, res, next) => {
         passport.authenticate("local", (errors, user) => {
             if (user) {
@@ -157,6 +170,7 @@ module.exports = {
                 });
         })(req, res, next);
     },
+
     verifyJWT: (req, res, next) => {
         let token = req.headers.token;
         if (token) {
@@ -191,6 +205,7 @@ module.exports = {
             });
         }
     },
+
     validate: (req, res, next) => {
         req.sanitizeBody("email")
             .normalizeEmail({
