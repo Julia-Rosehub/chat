@@ -19,13 +19,15 @@ module.exports = {
             }
         });
     },
-
     new: (req, res) => {
         res.render("subscribers/new");
     },
-
     create: (req, res, next) => {
-        let subscriberParams = getSubscriberParams(req.body);
+        let subscriberParams = {
+            name: req.body.name,
+            email: req.body.email,
+            zipCode: req.body.zipCode
+        };
         Subscriber.create(subscriberParams)
             .then(subscriber => {
                 res.locals.redirect = "/subscribers";
@@ -37,7 +39,6 @@ module.exports = {
                 next(error);
             });
     },
-
     redirectView: (req, res, next) => {
         let redirectPath = res.locals.redirect;
         if (redirectPath) res.redirect(redirectPath);
@@ -56,30 +57,29 @@ module.exports = {
                 next(error);
             });
     },
-
     showView: (req, res) => {
         res.render("subscribers/show");
     },
-
     edit: (req, res, next) => {
-        var subscriberId = req.params.id;
+        let subscriberId = req.params.id;
         Subscriber.findById(subscriberId)
             .then(subscriber => {
                 res.render("subscribers/edit", {
-                    subscriber: subscriber
+                    subscriber
                 });
             })
             .catch(error => {
-                console.log(`Error fetching subscriber by ID:
- ${error.message}`);
+                console.log(`Error fetching subscriber by ID: ${error.message}`);
                 next(error);
             });
     },
-
     update: (req, res, next) => {
         let subscriberId = req.params.id,
-            subscriberParams = getSubscriberParams(req.body);
-
+            subscriberParams = {
+                name: req.body.name,
+                email: req.body.email,
+                zipCode: req.body.zipCode
+            };
         Subscriber.findByIdAndUpdate(subscriberId, {
             $set: subscriberParams
         })
@@ -94,7 +94,6 @@ module.exports = {
                 next(error);
             });
     },
-
     delete: (req, res, next) => {
         let subscriberId = req.params.id;
         Subscriber.findByIdAndRemove(subscriberId)

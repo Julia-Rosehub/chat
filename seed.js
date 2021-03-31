@@ -2,7 +2,7 @@ const mongoose = require("mongoose"),
     Subscriber = require("./models/subscriber");
 
 mongoose.connect(
-    process.env.DB_URI || "mongodb://localhost/chat_db",
+    process.env.DB_URL || "mongodb://localhost/chat_db",
     { useNewUrlParser: true, useUnifiedTopology: true }
 );
 

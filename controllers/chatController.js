@@ -9,7 +9,8 @@ module.exports = io => {
             .limit(10)
             .then(messages => {
                 client.emit('load all messages', messages.reverse());
-            });
+            })
+            .catch(error => console.log(new Error(error)));
 
         client.on("disconnect", () => {
             client.broadcast.emit("user disconnected");

@@ -17,7 +17,7 @@ require("dotenv").config();
 
 const app = express();
 mongoose.connect(
-    process.env.DB_URI || "mongodb://localhost/chat_db",
+    process.env.DB_URL || "mongodb://localhost/chat_db",
     {
         useNewUrlParser: true
     }
