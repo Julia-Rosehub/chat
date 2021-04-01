@@ -1,7 +1,5 @@
-'use strict';
-
-const router = require('express').Router(),
-    errorController = require('../controllers/errorController');
+const router = require('express').Router();
+const errorController = require('../controllers/errorController');
 
 router.use(errorController.respondNoResourceFound);
 router.use(errorController.respondInternalError);
