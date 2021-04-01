@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Course = require('./models/course');
 
-mognoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 mongoose.connect(
   process.env.DB_URL || 'mongodb://localhost/chat_db',
   { useUnifiedTopology: true }
