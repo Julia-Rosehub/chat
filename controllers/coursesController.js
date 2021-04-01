@@ -157,7 +157,29 @@ module.exports = {
           next(error);
         });
     } else {
-      next(new Error('User must log in.'));
+      next(new Error('User must sign in.'));
+    }
+  },
+
+  canceljoin: (req, res, next) => {
+    const courseId = req.params.id;
+    const currentUser = req.user;
+
+    if (currentUser) {
+      User.findByIdAndUpdate(currentUser, {
+        $pull: {
+          courses: courseId,
+        },
+      })
+        .then(() => {
+          res.locals.success = true;
+          next();
+        })
+        .catch((error) => {
+          next(error);
+        });
+    } else {
+      next(new Error('User must sign in.'));
     }
   },
 
