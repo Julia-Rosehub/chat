@@ -59,10 +59,6 @@ $(document).ready(() => {
       $.get(`/api/courses/${courseId}/join`, (results = {}) => {
         let data = results.data;
         if (data && data.success) {
-          $button
-            .text("Joined")
-            .addClass("joined-button")
-            .removeClass("join-button");
           setButtons();
         } else {
           $button.text("Log in");
@@ -78,10 +74,6 @@ $(document).ready(() => {
       $.get(`/api/courses/${courseId}/canceljoin`, (results = {}) => {
         let data = results.data;
         if (data && data.success) {
-          $button
-            .text("Join")
-            .addClass("join-button")
-            .removeClass("joined-button");
           setButtons();
         }
         else {
@@ -92,8 +84,8 @@ $(document).ready(() => {
   };
 
   const setButtons = () => {
-    $(".modal-body").html('');
     $.get("/api/courses", (results = {}) => {
+      $(".modal-body").empty();
       let data = results.data;
       if (!data || !data.courses) return;
       data.courses.forEach((course) => {
@@ -120,7 +112,8 @@ $(document).ready(() => {
     });
   };
 
-  $("#modal-button").click(() => {
+  $("#modal-button").click((e) => {
+    e.preventDefault();
     setButtons();
   });
 
