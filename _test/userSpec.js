@@ -36,3 +36,15 @@ describe('SAVE user', () => {
       });
   });
 });
+
+describe("/users GET", () => {
+  it("it should GET all the users", (done) => {
+    chai.request(app)
+      .get("/users")
+      .end((errors, res) => {
+        expect(res).to.have.status(200);
+        expect(errors).to.be.equal(null);
+        done();
+      });
+  });
+});
