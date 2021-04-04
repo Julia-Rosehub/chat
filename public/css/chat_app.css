@@ -18,18 +18,53 @@ body {
     padding-top: 40px;
 }
 
-#nav {
-    border-bottom: solid 8px #9a6229;
-    background-color: #7D498D;
-    box-shadow: 10px 10px 10px #ccc;
-}
-
-#title {
+.title {
     color: #f1dddc;
     margin: 0;
     font-family: "Baloo Bhaina";
     text-transform: uppercase;
 }
+
+#nav {
+  border-bottom: solid 8px #9a6229;
+  background-color: #7D498D;
+  box-shadow: 10px 10px 10px #ccc;
+}
+
+#header {
+    width: 100%;
+    background-color: #7D498D;
+    height: 60px;
+}
+
+#header h1 {
+    position: absolute;
+    left: 30px;
+    top: 20px;
+}
+
+#chat-logo {
+    width: 60px;
+    height: 60px;
+}
+
+#tag {
+  animation: fadein 1s forwards,slideright 1s forwards;
+  position: relative;
+  right: 35%;
+  top: 30%;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+@keyframes fadein{
+  0%{opacity:0}to{opacity:1}
+}
+
+@keyframes slideright{
+  0%{transform:translateX(-45px)}to{transform:translateX(0)
+}}
 
 a {
     color: #333;
@@ -37,21 +72,24 @@ a {
     outline: none;
 }
 
+img {
+  width: 100%;
+}
+
 #nav a {
     text-decoration: none;
 }
 
 .button {
-    background-color: #3d41b4;
-    padding: 0.3vw 3vw;
-    border-radius: 2px;
+    background-color: #ffe7a2;
+    color: #625956;
+    padding: 1px 30px;
     cursor: pointer;
     display: inline-block;
-    color: #fff;
 }
 
-.button:hover {
-    background-color: #697acb;
+.button:hover, #modal-button:hover {
+    background-color: #edeff8;
 }
 
 .subscriber {
