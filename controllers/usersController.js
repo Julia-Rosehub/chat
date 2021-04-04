@@ -14,6 +14,7 @@ const getUserParams = (body) => ({
 });
 
 module.exports = {
+  getUserParams,
   index: (req, res, next) => {
     User.find()
       .then((users) => {

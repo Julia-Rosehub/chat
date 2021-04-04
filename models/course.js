@@ -7,26 +7,18 @@ const courseSchema = new Schema(
     title: {
       type: String,
       required: true,
-      unique: true,
+      unique: true
     },
     description: {
       type: String,
-      required: true,
+      required: true
     },
-    maxStudents: {
+    items: [],
+    zipCode: {
       type: Number,
-      default: 0,
-      min: [0, "Courses can't have a negative number of students"],
-    },
-    cost: {
-      type: Number,
-      default: 0,
-      min: [0, "Courses can't have a negative cost"],
-    },
-  },
-  {
-    timestamps: true,
-  },
-);
+      min: [100000, "Zip code too short"],
+      max: 999999
+    }
+  });
 
 module.exports = mongoose.model('Course', courseSchema);

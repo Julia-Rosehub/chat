@@ -11,8 +11,8 @@ Course.remove({})
     return Course.create({
       title: 'Title One',
       description: 'Descriptive description',
-      maxStudents: 10,
-      cost: 5,
+      zipCode: 200700,
+      items: ['item1'],
     });
   })
   .then((course) => console.log(course.title))
@@ -20,8 +20,8 @@ Course.remove({})
     return Course.create({
       title: 'Title Two',
       description: 'Descriptive description Two',
-      maxStudents: 11,
-      cost: 15,
+      zipCode: 201701,
+      items: ['item1', 'item2', 'item3'],
     });
   })
   .then((course) => console.log(course.title))
@@ -29,8 +29,8 @@ Course.remove({})
     return Course.create({
       title: 'Title Three',
       description: 'Descriptive description Three',
-      maxStudents: 12,
-      cost: 20,
+      zipCode: 201702,
+      items: ['item1', 'item2'],
     });
   })
   .then((course) => console.log(course.title))

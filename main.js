@@ -13,17 +13,28 @@ const router = require('./routes/index');
 
 require('dotenv').config();
 
-const app = express();
-mongoose.connect(
-  process.env.DB_URL || 'mongodb://localhost/chat_db',
-  {
+if (process.env.NODE_ENV === 'test') {
+  mongoose.connect(
+    process.env.DB_URL || 'mongodb://localhost/chat_test_db', {
     useNewUrlParser: true,
-  },
-);
+  });
+} else {
+  mongoose.connect(
+    process.env.DB_URL || 'mongodb://localhost/chat_db', {
+    useNewUrlParser: true,
+  });
+}
+
+const app = express();
+
 mongoose.set('useCreateIndex', true);
 
-app.set('port', process.env.PORT || 3000);
-app.set('view engine', 'ejs');
+if (process.env.NODE_ENV === 'test') {
+  app.set("port", 3001);
+} else {
+  app.set("port", process.env.PORT || 3000);
+  app.set('view engine', 'ejs');
+}
 
 let { SESSION_SECRET, JWT_SECRET } = process.env;
 
@@ -106,3 +117,5 @@ const server = app.listen(app.get('port'), () => {
 });
 const io = require('socket.io')(server);
 require('./controllers/chatController')(io);
+
+module.exports = app;
