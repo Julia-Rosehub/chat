@@ -5,7 +5,8 @@ const usersController = require('../controllers/usersController');
 router.post('/login', usersController.apiAuthenticate);
 // router.use(usersController.verifyJWT);
 router.get('/courses/:id/join', coursesController.join,
-  coursesController.respondJSON);
+  coursesController.respondJSON,
+);
 router.get('/courses/:id/canceljoin', coursesController.canceljoin,
   coursesController.respondJSON);
 router.get('/courses',

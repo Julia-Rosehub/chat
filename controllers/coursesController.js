@@ -119,7 +119,7 @@ module.exports = {
     res.json({
       status: httpStatus.OK,
       data: res.locals,
-    });
+    })
   },
 
   errorJSON: (error, req, res, next) => {
