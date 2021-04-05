@@ -119,7 +119,7 @@ $(document).ready(() => {
 
   $(window).scroll(() => {
     if (($("#nav-icon")[0].scrollHeight) - ($(window)[0].scrollY) === ($("#nav-icon")[0].clientHeight)) {
-      $(".chat-icon").css("color", "white");
+      $(".chat-icon").css("color", "#565662");
     } else $(".chat-icon").css("color", "red");
   });
 });

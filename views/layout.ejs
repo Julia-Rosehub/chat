@@ -26,44 +26,44 @@
     <p id="tag">
       <em>chat</em>
     </p>
-  </header>
-  <div id="nav">
+    <div id="nav">
 
-    <div id="nav-icon" class="nav-align">
+      <div id="nav-icon">
+
+        <% if (loggedIn) { %>
+          <a href="/chat" class="chat-icon">
+            @
+          </a>
+          <% } %>
+            <a href="/">
+              <span class="button">Home</span>
+            </a>
+            <a href="/contact">
+              <span class="button">Contact</span>
+            </a>
+            <%- include("courses/coursesModal") %>
+
+      </div>
+    </div>
+    <div class="login">
 
       <% if (loggedIn) { %>
-        <a href="/chat" class="chat-icon">
-          @
-        </a>
-        <% } %>
-          <a href="/">
-            <span class="button">Home</span>
+        <p>Logged in as
+          <a href="<%=`/users/${currentUser._id}`%>">
+            <%= currentUser.fullName %>
           </a>
-          <a href="/contact">
-            <span class="button">Contact</span>
-          </a>
-          <%- include("courses/coursesModal") %>
-            <div class="login">
-
-              <% if (loggedIn) { %>
-                <p>Logged in as
-                  <a href="<%=`/users/${currentUser._id}`%>">
-                    <%= currentUser.fullName %>
-                  </a>
-                  <span class="log-out">
-                    <a href="/users/logout">Sign out</a>
-                  </span>
-                </p>
-                <%} else {%>
-                  <span class="log-out">
-                    <a href="/users/new">Sign Up</a>
-                  </span>
-                  <a href="/users/login">Sign In</a>
-                  <% } %>
-            </div>
+          <span class="log-out">
+            <a href="/users/logout">Sign out</a>
+          </span>
+        </p>
+        <%} else {%>
+          <span class="log-out">
+            <a href="/users/new">Sign Up</a>
+          </span>
+          <a href="/users/login">Sign In</a>
+          <% } %>
     </div>
-  </div>
-
+  </header>
   <div class="flashes">
     <% if (flashMessages) { %>
       <% if (flashMessages.success) { %>
