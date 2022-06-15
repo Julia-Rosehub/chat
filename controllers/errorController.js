@@ -13,4 +13,4 @@ const respondInternalError = (error, req, res, next) => {
   experiencing a problem!`);
 };
 
-module.exports = ({ respondInternalError, respondNoResourceFound });
+module.exports = { respondInternalError, respondNoResourceFound };
